@@ -2,15 +2,15 @@ type Query{
 
   # User Queries
 
-  user(id:ID!): User @field(resolver: "App\\GraphQL\\Queries\\UserQuery@user")
+  user(id:ID!): User @field(resolver: "UserQuery@user") @middleware(checks: "auth")
  
-  users: [User!]! @field(resolver: "App\\GraphQL\\Queries\\UserQuery@users")
+  users: [User!]! @field(resolver: "UserQuery@users")
 
   # Post Queries
 
-  posts: [Post!]! @field(resolver: "App\\GraphQL\\Queries\\PostQuery@posts")
+  posts: [Post!]! @field(resolver: "PostQuery@posts")
 
-  post(id:ID!): Post @field(resolver: "App\\GraphQL\\Queries\\PostQuery@post")
+  post(id:ID!): Post @field(resolver: "PostQuery@post")
 
 }
 
@@ -18,19 +18,19 @@ type Mutation{
 
   # User Mutations
 
-  createUser(name: String!, email: String!, password: String!): User @field(resolver: "App\\GraphQL\\Mutations\\UserMutation@createUser")
+  createUser(name: String!, email: String!, password: String!): User @field(resolver: "UserMutation@createUser")
 
-  updateUser(id: ID!, name: String, email: String, password: String): User @field(resolver: "App\\GraphQL\\Mutations\\UserMutation@updateUser")
+  updateUser(id: ID!, name: String, email: String, password: String): User @field(resolver: "UserMutation@updateUser")
 
-  deleteUser(id: ID!): User @field(resolver: "App\\GraphQL\\Mutations\\UserMutation@deleteUser")
+  deleteUser(id: ID!): User @field(resolver: "UserMutation@deleteUser")
 
   # Post Mutations
 
-  createPost(title: String!, content: String!, user_id: ID!): Post @field(resolver: "App\\GraphQL\\Mutations\\PostMutation@createPost")
+  createPost(title: String!, content: String!, user_id: ID!): Post @field(resolver: "PostMutation@createPost")
 
-  updatePost(id: ID!, title: String, content: String): Post @field(resolver: "App\\GraphQL\\Mutations\\PostMutation@updatePost")
+  updatePost(id: ID!, title: String, content: String): Post @field(resolver: "PostMutation@updatePost")
 
-  deletePost(id: ID!): Post @field(resolver: "App\\GraphQL\\Mutations\\PostMutation@deletePost")
+  deletePost(id: ID!): Post @field(resolver: "PostMutation@deletePost")
 
 }
 
