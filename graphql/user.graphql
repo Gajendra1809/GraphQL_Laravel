@@ -1,0 +1,40 @@
+extend type Query{
+  # User Queries
+
+  user(id:ID!): User @field(resolver: "UserQuery@user")
+ 
+  users: [User!]! @field(resolver: "UserQuery@users")
+
+  loginUser(email: String!, password: String!): LoginResponse @field(resolver: "UserQuery@login")
+
+}
+
+extend type Mutation{
+  # User Mutations
+
+  createUser(name: String!, email: String!, password: String!): User @field(resolver: "UserMutation@createUser")
+
+  updateUser(id: ID!, name: String, email: String, password: String): User @field(resolver: "UserMutation@updateUser")
+
+  deleteUser(id: ID!): User @field(resolver: "UserMutation@deleteUser")
+
+}
+
+# User type
+
+type User{
+
+  id: ID
+  name: String
+  email: String
+  posts: [Post] 
+
+}
+
+# Response
+
+type LoginResponse {
+    access_token: String!
+    token_type: String!
+    expires_at: String!
+}

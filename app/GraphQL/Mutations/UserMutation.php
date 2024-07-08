@@ -9,13 +9,13 @@ final class UserMutation
 {
     public function createUser($root, array $args)
     {
-        $user = new User();
-        $user->name = $args['name'];
-        $user->email = $args['email'];
-        $user->password = Hash::make($args['password']);
-        $user->save();
 
-        return $user;
+        return User::create([
+            'name' => $args['name'],
+            'email'=> $args['email'],
+            'password'=> Hash::make($args['password']),
+        ]);
+        
     }
 
     public function updateUser($root, array $args)

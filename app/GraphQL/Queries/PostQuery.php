@@ -4,6 +4,7 @@ namespace App\GraphQL\Queries;
 
 use App\Models\Post;
 
+
 final class PostQuery
 {
     public function posts(){
