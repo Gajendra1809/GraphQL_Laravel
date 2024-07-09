@@ -31,10 +31,14 @@ type User{
 
 }
 
-# Response
+# Login Response
 
 type LoginResponse {
-    access_token: String!
-    token_type: String!
-    expires_at: String!
+
+    success: Boolean!
+    message: String!
+    access_token: String
+    token_type: String
+    expires_at: String
+    
 }

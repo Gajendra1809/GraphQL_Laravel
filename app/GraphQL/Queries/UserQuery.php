@@ -31,7 +31,10 @@ final class UserQuery
         ];
  
         if (!Auth::attempt($credentials)) {
-            throw new \Exception('Invalid credentials');
+            return [
+                'success' => false,
+                'message' => 'Wrong Credentials!'
+            ];
         }
 
         $user = Auth::user();
@@ -41,6 +44,8 @@ final class UserQuery
         $token->save();
 
         return [
+            'success' => true,
+            'message'=> 'Login Successful',
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
         ];
