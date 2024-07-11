@@ -5,6 +5,7 @@ namespace App\GraphQL\Queries;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Facades\Log;
 
 
 final class UserQuery
@@ -38,6 +39,7 @@ final class UserQuery
         }
 
         $user = Auth::user();
+
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
 
@@ -50,5 +52,17 @@ final class UserQuery
             'token_type' => 'Bearer',
         ];
 
+    }
+
+    public function logout(){
+
+        $user = auth()->user();
+
+        $user->token()->revoke();
+
+        return [
+            'success' => true,
+            'message' => 'Logout Successful'
+        ];
     }
 }

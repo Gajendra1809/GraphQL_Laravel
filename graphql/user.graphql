@@ -1,11 +1,13 @@
 extend type Query{
   # User Queries
 
-  user(id:ID!): User @field(resolver: "UserQuery@user")
+  user(id:ID!): User @field(resolver: "UserQuery@user") @guard(with: ["api"])
  
-  users: [User!]! @field(resolver: "UserQuery@users")
+  users: [User!]! @field(resolver: "UserQuery@users") @guard(with: ["api"])
 
   loginUser(email: String!, password: String!): LoginResponse @field(resolver: "UserQuery@login")
+
+  logoutUser: LoginResponse @field(resolver: "UserQuery@logout") @guard(with: ["api"])
 
 }
 
@@ -13,7 +15,7 @@ extend type Mutation{
   # User Mutations
 
   createUser(name: String!, email: String!, password: String!): User @field(resolver: "UserMutation@createUser")
-
+ 
   updateUser(id: ID!, name: String, email: String, password: String): User @field(resolver: "UserMutation@updateUser")
 
   deleteUser(id: ID!): User @field(resolver: "UserMutation@deleteUser")

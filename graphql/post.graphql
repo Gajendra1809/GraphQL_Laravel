@@ -1,20 +1,20 @@
 extend type Query{
   # Post Queries
 
-  posts: [Post!]! @field(resolver: "PostQuery@posts") 
+  posts: [Post!]! @field(resolver: "PostQuery@posts") @guard(with: ["api"])
 
-  post(id:ID!): Post @field(resolver: "PostQuery@post")
+  post(id:ID!): Post @field(resolver: "PostQuery@post") @guard(with: ["api"])
 
 }
 
 extend type Mutation{
   # Post Mutations
 
-  createPost(title: String!, content: String!, user_id: ID!): Post @field(resolver: "PostMutation@createPost")
+  createPost(title: String!, content: String!): Response @field(resolver: "PostMutation@createPost") @guard(with: ["api"])
 
-  updatePost(id: ID!, title: String, content: String): Post @field(resolver: "PostMutation@updatePost")
+  updatePost(id: ID!, title: String, content: String): Response @field(resolver: "PostMutation@updatePost") @guard(with: ["api"])
 
-  deletePost(id: ID!): Post @field(resolver: "PostMutation@deletePost")
+  deletePost(id: ID!): Response @field(resolver: "PostMutation@deletePost") @guard(with: ["api"])
 
 }
 
@@ -27,5 +27,13 @@ type Post{
   content: String
   user_id: ID
   user: User @belongsTo
+
+}
+
+type Response {
+
+  success: Boolean!
+  message: String!
+  data: Post
 
 }
