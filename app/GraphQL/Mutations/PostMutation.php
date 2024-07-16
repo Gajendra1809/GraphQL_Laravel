@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Log;
 
 final class PostMutation
 {
+    /**
+     * Creates a new post.
+     *
+     * @param mixed $root The root object.
+     * @param array $args The arguments for the function.
+     * @return array The result of the function.
+     */
     public function createPost($root, array $args)
     {
         $post = new Post();
@@ -29,6 +36,13 @@ final class PostMutation
         ];
     }
 
+    /**
+     * Updates a post with the provided arguments.
+     *
+     * @param mixed $root The root object.
+     * @param array $args The arguments for the update.
+     * @return array The result of the post update operation.
+     */
     public function updatePost($root, array $args)
     {
         $post = Post::findOrFail($args['id']);
@@ -54,6 +68,13 @@ final class PostMutation
         ];
     }
 
+    /**
+     * Deletes a post based on the provided arguments.
+     *
+     * @param mixed $root The root object.
+     * @param array $args The arguments for the deletion.
+     * @return array The result of the post deletion operation.
+     */
     public function deletePost($root, array $args)
     {
         $post = Post::findOrFail($args['id']);

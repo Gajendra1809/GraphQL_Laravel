@@ -12,6 +12,11 @@ final class UserQuery
 {
     use HasApiTokens;
 
+    /**
+     * Retrieves all users from the database.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|User[] The collection of all users.
+     */
     public function users(){
 
         return User::all();
