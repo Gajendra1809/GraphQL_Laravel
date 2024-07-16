@@ -1,3 +1,5 @@
+scalar Upload @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+
 extend type Query{
   # Post Queries
 
@@ -10,11 +12,13 @@ extend type Query{
 extend type Mutation{
   # Post Mutations
 
-  createPost(title: String!, content: String!): Response @field(resolver: "PostMutation@createPost") @guard(with: ["api"])
+  createPost(title: String!, content: String!, file: Upload!): Response @field(resolver: "PostMutation@createPost") @guard(with: ["api"])
 
   updatePost(id: ID!, title: String, content: String): Response @field(resolver: "PostMutation@updatePost") @guard(with: ["api"])
 
   deletePost(id: ID!): Response @field(resolver: "PostMutation@deletePost") @guard(with: ["api"])
+
+  uploadFile(file: Upload!): String! @field(resolver: "FileUpload@uploadFile")
 
 }
 
@@ -26,6 +30,7 @@ type Post{
   title: String
   content: String
   user_id: ID
+  image_url: String
   user: User @belongsTo
 
 }

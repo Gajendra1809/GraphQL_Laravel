@@ -13,7 +13,7 @@
         "laravel/telescope": "^5.1",
         "laravel/tinker": "^2.8",
         "mll-lab/laravel-graphiql": "^3.2",
-        "nuwave/lighthouse": "^6.40",
+        "nuwave/lighthouse": "^6.41",
         "pusher/pusher-php-server": "^7.2"
     },
     "require-dev": {

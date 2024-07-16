@@ -13,6 +13,12 @@ final class PostMutation
         $post = new Post();
         $post->title = $args['title'];
         $post->content = $args['content'];
+
+        if(isset($args['file'])){
+        $image = $args['file'];
+        $post->image_url = $image->store('images', 'public');
+        }
+
         $post->user_id = auth()->user()->id;
         $post->save();
 

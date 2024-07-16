@@ -20,7 +20,16 @@ final class UserQuery
 
     public function user($root, array $args){
 
-        return User::find($args['id']);
+        $user = User::find($args['id']);
+
+        if(!$user){
+            return [
+                'success' => false,
+                'message' => 'User not found!'
+            ];
+        }
+
+        return $user;
     
     }
 
