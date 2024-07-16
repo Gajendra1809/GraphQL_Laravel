@@ -2,12 +2,16 @@
 
 namespace App\GraphQL\Mutations;
 
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 final class FileUpload
 {
 
     public function uploadFile($root, array $args)
     {
         $image = $args['file'];
-        return $image->store('images', 'public');
+        $uploadedFileUrl = cloudinary()->upload($image->getRealPath())->getSecurePath();
+        return $uploadedFileUrl;
+        
     }
 }
