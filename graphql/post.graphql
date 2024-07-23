@@ -13,7 +13,7 @@ extend type Query{
 extend type Mutation{
   # Post Mutations
 
-  createPost(title: String!, content: String!, file: Upload!): Response @field(resolver: "PostMutation@createPost") @guard(with: ["api"])
+  createPost(title: String!, content: String!, file: Upload): Response @field(resolver: "PostMutation@createPost") @guard(with: ["api"])
 
   updatePost(id: ID!, title: String, content: String): Response @field(resolver: "PostMutation@updatePost") @guard(with: ["api"])
 

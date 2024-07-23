@@ -18,7 +18,7 @@ extend type Mutation{
  
   updateUser(id: ID!, name: String, email: String, password: String): User @field(resolver: "UserMutation@updateUser")
 
-  deleteUser(id: ID!): User @field(resolver: "UserMutation@deleteUser")
+  deleteUser(id: ID!): String @field(resolver: "UserMutation@deleteUser")
 
 }
 

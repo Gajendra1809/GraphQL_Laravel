@@ -3,37 +3,20 @@
 namespace App\GraphQL\Mutations;
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use App\Services\PostService;
 
 final class PostMutation
 {
-    /**
-     * Creates a new post.
-     *
-     * @param mixed $root The root object.
-     * @param array $args The arguments for the function.
-     * @return array The result of the function.
-     */
+    
+    public $postService;
+
+    public function __construct(PostService $postService){
+        $this->postService = $postService;
+    }
+
     public function createPost($root, array $args)
     {
-        $post = new Post();
-        $post->title = $args['title'];
-        $post->content = $args['content'];
-
-        if(isset($args['file'])){
-        $image = $args['file'];
-        $post->image_url = $image->store('images', 'public');
-        }
-
-        $post->user_id = auth()->user()->id;
-        $post->save();
-
-        return [
-            'success' => true,
-            'message' => 'Post created successfully',
-            'data' => $post
-        ];
+        return $this->postService->create($args);
     }
 
     /**

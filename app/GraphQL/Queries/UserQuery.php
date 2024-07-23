@@ -23,6 +23,13 @@ final class UserQuery
 
     }
 
+    /**
+     * Retrieves a specific user based on the provided ID.
+     *
+     * @param mixed $root The root object.
+     * @param array $args An array containing the user's ID.
+     * @return \App\Models\User The user with the given ID.
+     */
     public function user($root, array $args){
 
         $user = User::find($args['id']);
@@ -38,6 +45,13 @@ final class UserQuery
     
     }
 
+    /**
+     * Logs in a user with the provided credentials.
+     *
+     * @param mixed $root The root object.
+     * @param array $args An array containing the user's email and password.
+     * @return array The result of the login operation including success status, message, access token, and token type.
+     */
     public function login($root, array $args){
 
         $credentials = [
@@ -68,6 +82,11 @@ final class UserQuery
 
     }
 
+    /**
+     * Logs out the user by revoking the user's token.
+     *
+     * @return array The result of the logout operation including success status and a message.
+     */
     public function logout(){
 
         $user = auth()->user();
