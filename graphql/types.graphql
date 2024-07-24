@@ -1,0 +1,45 @@
+# User type
+
+type User{
+
+  id: ID
+  name: String
+  email: String
+  posts: [Post] 
+
+}
+
+# Post type
+
+type Post{
+
+  id: ID
+  title: String
+  content: String
+  user_id: ID
+  image_url: String
+  user: User @belongsTo
+
+}
+
+# Post Response
+
+type Response {
+
+  success: Boolean!
+  message: String!
+  data: Post
+
+}
+
+# Login Response
+
+type LoginResponse {
+
+    success: Boolean!
+    message: String!
+    access_token: String
+    token_type: String
+    expires_at: String
+    
+}

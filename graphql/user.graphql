@@ -14,33 +14,10 @@ extend type Query{
 extend type Mutation{
   # User Mutations
 
-  createUser(name: String!, email: String!, password: String!): User @field(resolver: "UserMutation@createUser")
+  createUser(input: CreateUserInput! @spread): User @field(resolver: "UserMutation@createUser")
  
-  updateUser(id: ID!, name: String, email: String, password: String): User @field(resolver: "UserMutation@updateUser")
+  updateUser(input: UpdateUserInput! @spread): User @field(resolver: "UserMutation@updateUser")
 
   deleteUser(id: ID!): String @field(resolver: "UserMutation@deleteUser")
 
-}
-
-# User type
-
-type User{
-
-  id: ID
-  name: String
-  email: String
-  posts: [Post] 
-
-}
-
-# Login Response
-
-type LoginResponse {
-
-    success: Boolean!
-    message: String!
-    access_token: String
-    token_type: String
-    expires_at: String
-    
 }

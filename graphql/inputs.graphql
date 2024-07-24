@@ -1,0 +1,40 @@
+
+scalar Upload @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+
+# User inputs
+
+input CreateUserInput {
+
+  name: String! @rules(apply: ["min:3", "max:255"])
+  email: String! @rules(apply: ["email", "unique:users,email"])
+  password: String! @rules(apply: ["min:5"])
+
+}
+
+input UpdateUserInput @validator{
+
+  id: ID!
+  name: String
+  email: String 
+  password: String
+
+}
+
+
+# Post inputs
+
+input CreatePostInput {
+
+  title: String! @rules(apply: ["min:3", "max:255"])
+  content: String! @rules(apply: ["min:5"])
+  file: Upload
+
+}
+
+input UpdatePostInput {
+
+  id: ID!
+  title: String @rules(apply: ["min:3", "max:255"])
+  content: String @rules(apply: ["min:5"])
+
+}

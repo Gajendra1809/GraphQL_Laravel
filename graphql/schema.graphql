@@ -1,3 +1,7 @@
 #import post.graphql
 
 #import user.graphql
+
+#import types.graphql
+
+#import inputs.graphql
