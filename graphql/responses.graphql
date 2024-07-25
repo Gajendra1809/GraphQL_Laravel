@@ -1,0 +1,33 @@
+# Post Response
+
+type PostResponse {
+
+  success: Boolean!
+  message: String!
+  data: Post
+  error: Error
+
+}
+
+# User Response
+
+type UserResponse {
+
+  success: Boolean!
+  message: String!
+  data: User
+  error: Error
+
+}
+
+# Login Response
+
+type LoginResponse {
+
+    success: Boolean!
+    message: String!
+    access_token: String
+    token_type: String
+    expires_at: String
+    
+}

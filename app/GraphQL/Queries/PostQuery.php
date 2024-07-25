@@ -24,4 +24,8 @@ final class PostQuery
         return $this->postService->getPost($args);
 
     }
+
+    public function myPosts(){
+        return $this->postService->myPosts();
+    }
 }

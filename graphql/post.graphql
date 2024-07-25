@@ -6,16 +6,18 @@ extend type Query{
 
   post(id:ID!): Post @field(resolver: "PostQuery@post") @guard(with: ["api"])
 
+  myPosts: [Post!]! @field(resolver: "PostQuery@myPosts") @guard(with: ["api"])
+
 }
 
 extend type Mutation{
   # Post Mutations
 
-  createPost(input: CreatePostInput! @spread): Response @field(resolver: "PostMutation@createPost") @guard(with: ["api"])
+  createPost(input: CreatePostInput! @spread): PostResponse @field(resolver: "PostMutation@createPost") @guard(with: ["api"])
 
-  updatePost(input: UpdatePostInput! @spread): Response @field(resolver: "PostMutation@updatePost") @guard(with: ["api"])
+  updatePost(input: UpdatePostInput! @spread): PostResponse @field(resolver: "PostMutation@updatePost") @guard(with: ["api"])
 
-  deletePost(id: ID!): Response @field(resolver: "PostMutation@deletePost") @guard(with: ["api"])
+  deletePost(id: ID!): PostResponse @field(resolver: "PostMutation@deletePost") @guard(with: ["api"])
 
   uploadFile(file: Upload!): String! @field(resolver: "FileUpload@uploadFile")
 

@@ -5,10 +5,12 @@ namespace App\Services;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\HasApiTokens;
+use App\Traits\Response;
 
 class UserService
 {
-    use HasApiTokens;
+    
+    use HasApiTokens, Response;
 
     public $userRepository;
 
@@ -74,19 +76,39 @@ class UserService
 
     public function create(array $data){
 
-        return $this->userRepository->create($data);
+        try {
+
+            $user = $this->userRepository->create($data);
+        
+            return $this->success($user, 'User created successfully');
+
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage(), $e->getCode());
+        }
 
     }
 
     public function update(array $data){
 
-        return $this->userRepository->update($data["id"], $data);
+        try {
+
+            $user = $this->userRepository->update($data["id"], $data);
+
+            return $this->success($user, 'User updated successfully');
+
+        } catch(\Exception $e) {
+            return $this->error($e->getMessage(), $e->getCode());
+        }
 
     }
 
     public function delete(array $data){
 
-        return $this->userRepository->delete($data["id"]);
+        try {
+            $this->userRepository->delete($data["id"]);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage(), $e->getCode());
+        }
 
     }
 

@@ -19,27 +19,28 @@ type Post{
   user_id: ID
   image_url: String
   user: User @belongsTo
+  comment: [Comment] 
 
 }
 
-# Post Response
+# Comment type
 
-type Response {
+type Comment{
 
-  success: Boolean!
-  message: String!
-  data: Post
+  id: ID
+  content: String
+  user_id: Int
+  post_id: Int
+  user: User @belongsTo
+  post: Post @belongsTo
 
 }
 
-# Login Response
+# Error type
 
-type LoginResponse {
+type Error {
 
-    success: Boolean!
-    message: String!
-    access_token: String
-    token_type: String
-    expires_at: String
-    
+  message: String
+  code: Int
+
 }

@@ -5,3 +5,7 @@
 #import types.graphql
 
 #import inputs.graphql
+
+#import comment.graphql
+
+#import responses.graphql

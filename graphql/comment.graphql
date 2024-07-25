@@ -1,0 +1,16 @@
+extend type Query {
+
+    comments: [Comment!]! @field(resolver: "CommentQuery@comments") @guard(with: ["api"])
+
+    commentsByPostId(id: ID!): [Comment!]! @field(resolver: "CommentQuery@commentsByPostId") @guard(with: ["api"])
+
+}
+
+
+extend type Mutation {
+
+    createComment(input: CreateCommentInput! @spread): Comment! @field(resolver: "CommentMutation@create") @guard(with: ["api"])
+ 
+    deleteComment(id: ID!): String! @field(resolver: "CommentMutation@delete") @guard(with: ["api"])
+    
+}

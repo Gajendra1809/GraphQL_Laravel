@@ -20,6 +20,13 @@ input UpdateUserInput @validator{
 
 }
 
+input LoginUserInput {
+
+  email: String! @rules(apply: ["email"])
+  password: String! @rules(apply: ["min:5"])
+
+}
+
 
 # Post inputs
 
@@ -36,5 +43,15 @@ input UpdatePostInput {
   id: ID!
   title: String @rules(apply: ["min:3", "max:255"])
   content: String @rules(apply: ["min:5"])
+
+}
+
+
+# Comment inputs
+
+input CreateCommentInput {
+
+  content: String! @rules(apply: ["min:5"])
+  post_id: Int!
 
 }
