@@ -6,6 +6,7 @@ type User{
   name: String
   email: String
   posts: [Post] 
+  credit: Int
 
 }
 

@@ -77,7 +77,8 @@ class UserService
     public function create(array $data){
 
         try {
-
+            
+            $data["credit"] = config("credit.default_credit");
             $user = $this->userRepository->create($data);
         
             return $this->success($user, 'User created successfully');
@@ -92,6 +93,11 @@ class UserService
 
         try {
 
+            if(isset($data['credit'])){
+                $user = $this->userRepository->find($data['id']);
+                $data["credit"] = $user->credit + $data["credit"];
+            }
+            
             $user = $this->userRepository->update($data["id"], $data);
 
             return $this->success($user, 'User updated successfully');

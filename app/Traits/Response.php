@@ -12,6 +12,13 @@ trait Response
         ];
      }
 
+     protected function fail($message = null){
+        return [
+            'success' => false,
+            'message' => $message,
+        ];
+     }
+
      protected function error($message, $code){
         return [
             'success' => false,

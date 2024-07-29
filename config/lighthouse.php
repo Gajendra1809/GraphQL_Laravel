@@ -261,6 +261,7 @@ return [
         Nuwave\Lighthouse\Execution\ReportingErrorHandler::class,
     ],
 
+
     /*
     |--------------------------------------------------------------------------
     | Field Middleware

@@ -4,27 +4,33 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use GraphQL\Error\Error;
+use Illuminate\Http\Request;
 
 class Handler extends ExceptionHandler
 {
-    /**
-     * The list of the inputs that are never flashed to the session on validation exceptions.
-     *
-     * @var array<int, string>
-     */
-    protected $dontFlash = [
-        'current_password',
-        'password',
-        'password_confirmation',
-    ];
+    // Other methods...
 
-    /**
-     * Register the exception handling callbacks for the application.
-     */
-    public function register(): void
+    public function render($request, Throwable $exception)
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        // $error = $this->formatGraphQLError($exception);
+        // return response()->json([
+        //     'errors' => [$error],
+        // ], 200);
+
+        return parent::render($request, $exception);
+    }
+
+    protected function formatGraphQLError(Throwable $exception): array
+    {
+        return [
+            'message' => $exception->getMessage(),
+            'extensions' => [
+                'category' => 'custom',
+                'code' => $exception->getCode(),
+                'status' => 400, // or another status code
+                // Add more custom fields as needed
+            ],
+        ];
     }
 }

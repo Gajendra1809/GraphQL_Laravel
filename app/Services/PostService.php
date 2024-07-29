@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\PostRepository;
+use App\Repositories\UserRepository;
 use App\Traits\Response;
 
 class PostService
@@ -10,10 +11,12 @@ class PostService
     use Response;
 
     public $postRepository;
+    public $userRepository;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostRepository $postRepository, UserRepository $userRepository)
     {
         $this->postRepository = $postRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function getAllPosts(){
@@ -35,14 +38,25 @@ class PostService
     public function create(array $data){
 
         try {
+
+            if(auth()->user()->credit < config("credit.min_credit")){
+                return $this->fail("Not enough credit! Bye more credits to post");
+            }
+
             if(isset($data['file'])){
                 $image = $data['file'];
                 $data["image_url"] = $image->store('images', 'public');
             }
-                
+
             $data["user_id"] = auth()->user()->id;
     
             $post = $this->postRepository->create($data);
+
+            $credits = auth()->user()->credit;
+            $credits = $credits - config("credit.min_credit");
+            $arr['credit'] = $credits;
+
+            $this->userRepository->update(auth()->user()->id, $arr);
 
             return $this->success($post, 'Post created successfully');
 

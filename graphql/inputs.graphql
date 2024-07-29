@@ -55,3 +55,10 @@ input CreateCommentInput {
   post_id: Int!
 
 }
+
+input CreateCreditInput {
+
+  id: ID!,
+  credit: Int
+  
+}

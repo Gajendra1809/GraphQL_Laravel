@@ -16,8 +16,10 @@ extend type Mutation{
 
   createUser(input: CreateUserInput! @spread): UserResponse @field(resolver: "UserMutation@createUser")
  
-  updateUser(input: UpdateUserInput! @spread): UserResponse @field(resolver: "UserMutation@updateUser")
+  updateUser(input: UpdateUserInput! @spread): UserResponse @field(resolver: "UserMutation@updateUser") @guard(with: ["api"])
 
-  deleteUser(id: ID!): UserResponse @field(resolver: "UserMutation@deleteUser")
+  deleteUser(id: ID!): UserResponse @field(resolver: "UserMutation@deleteUser") @guard(with: ["api"])
+
+  createCredit(input: CreateCreditInput! @spread): UserResponse @field(resolver: "UserMutation@createCredit") @guard(with: ["api"])
 
 }

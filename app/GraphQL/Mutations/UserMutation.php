@@ -27,4 +27,9 @@ final class UserMutation
     {
         return $this->userService->delete($args);
     }
+
+    public function createCredit($root, array $args)
+    {
+        return $this->userService->update($args);
+    }
 }
