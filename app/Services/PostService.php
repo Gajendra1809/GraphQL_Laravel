@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\PostRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Gate;
 use App\Traits\Response;
 
 class PostService
@@ -70,12 +71,11 @@ class PostService
 
         try {
             $post = $this->postRepository->find($data['id']);
-            if($post->user_id != auth()->user()->id){
-                return [
-                    'success'=> false,
-                    'message'=> 'User not allowed to update this post'
-                ];
+
+            if (Gate::denies('update', $post)) {
+                return $this->fail('User not allowed to udate this post');
             }
+            
             $post = $this->postRepository->update($data['id'], $data);
 
             return $this->success($post, 'Post updated successfully');
@@ -90,12 +90,11 @@ class PostService
 
         try {
             $post = $this->postRepository->find($data['id']);
-            if($post->user_id != auth()->user()->id){
-            return [
-                'success'=> false,
-                'message'=> 'User not allowed to delete this post'
-            ];
+            
+            if (Gate::denies('delete', $post)) {
+                return $this->fail('User not allowed to delete this post');
             }
+
             $this->postRepository->delete($data['id']);
 
             return $this->success(null, 'Post deleted successfully');
