@@ -6,11 +6,10 @@ use App\Services\PostService;
 
 final class PostMutation
 {
-    
-    public $postService;
 
-    public function __construct(PostService $postService){
-        $this->postService = $postService;
+    public function __construct(
+        protected PostService $postService
+    ){
     }
 
     public function createPost($root, array $args)

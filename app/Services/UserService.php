@@ -12,11 +12,9 @@ class UserService
     
     use HasApiTokens, Response;
 
-    public $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
+    public function __construct(
+        protected UserRepository $userRepository
+    ){
     }
 
     public function login(array $data){
@@ -27,10 +25,7 @@ class UserService
         ];
  
         if (!Auth::attempt($credentials)) {
-            return [
-                'success' => false,
-                'message' => 'Wrong Credentials!'
-            ];
+            return $this->fail("Credentials do not match");
         }
 
         $user = Auth::user();
@@ -55,10 +50,7 @@ class UserService
 
         $user->token()->revoke();
 
-        return [
-            'success' => true,
-            'message' => 'Logout Successful'
-        ];
+        return $this->success(null, 'Logout Successful');
 
     }
 

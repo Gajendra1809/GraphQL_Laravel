@@ -7,10 +7,9 @@ use App\Services\UserService;
 final class UserMutation
 {
 
-    public $userService;
-
-    public function __construct(UserService $userService){
-        $this->userService = $userService;
+    public function __construct(
+        protected UserService $userService
+    ){
     }
 
     public function createUser($root, array $args)

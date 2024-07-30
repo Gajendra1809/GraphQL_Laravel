@@ -8,11 +8,9 @@ use Illuminate\Support\Facades\Auth;
 class CommentService
 {
 
-    public $commentRepository;
-
-    public function __construct(CommentRepository $commentRepository)
-    {
-        $this->commentRepository = $commentRepository;
+    public function __construct(
+        protected CommentRepository $commentRepository
+    ){
     }
 
     public function getAll(){

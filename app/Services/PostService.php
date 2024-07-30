@@ -11,13 +11,10 @@ class PostService
 {
     use Response;
 
-    public $postRepository;
-    public $userRepository;
-
-    public function __construct(PostRepository $postRepository, UserRepository $userRepository)
-    {
-        $this->postRepository = $postRepository;
-        $this->userRepository = $userRepository;
+    public function __construct(
+        protected PostRepository $postRepository,
+        protected UserRepository $userRepository
+    ){
     }
 
     public function getAllPosts(){
@@ -75,7 +72,7 @@ class PostService
             if (Gate::denies('update', $post)) {
                 return $this->fail('User not allowed to udate this post');
             }
-            
+
             $post = $this->postRepository->update($data['id'], $data);
 
             return $this->success($post, 'Post updated successfully');

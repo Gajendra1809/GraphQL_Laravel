@@ -7,10 +7,9 @@ use App\Services\CommentService;
 final class CommentQuery
 {
 
-    public $commentService;
-
-    public function __construct(CommentService $commentService){
-        $this->commentService = $commentService;
+    public function __construct(
+        protected CommentService $commentService
+    ){
     }
 
     public function comments(){

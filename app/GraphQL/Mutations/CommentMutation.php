@@ -6,11 +6,10 @@ use App\Services\CommentService;
 
 final class CommentMutation
 {
- 
-    public $commentService;
 
-    public function __construct(CommentService $commentService){
-        $this->commentService = $commentService;
+    public function __construct(
+        protected CommentService $commentService
+    ){
     }
 
     public function create($root, array $args){

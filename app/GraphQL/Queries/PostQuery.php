@@ -7,10 +7,10 @@ use App\Services\PostService;
 
 final class PostQuery
 {
-    public $postService;
-
-    public function __construct(PostService $postService){
-        $this->postService = $postService;
+    
+    public function __construct(
+        protected PostService $postService
+    ){
     }
 
     public function posts(){
